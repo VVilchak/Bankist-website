@@ -105,3 +105,23 @@ const handleHover = function (e, opacity) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+//sticky navigation
+//const initialCords = section1.getBoundingClientRect();
+//window.addEventListener('scroll', function () {
+//if (window.scrollY > initialCords.top) nav.classList.add('sticky');
+// else nav.classList.remove('sticky');
+//});
+
+const header = document.querySelector('.header');
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+});
+headerObserver.observe(header);
